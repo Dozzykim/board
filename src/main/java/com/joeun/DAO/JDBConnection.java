@@ -28,7 +28,9 @@ public class JDBConnection {
 			// :xe  또는 :orcl			- SID 	  (서비스 ID)
 			//String url ="jdbc:oracle:thin:@localhost:1521:xe"; // 11g
 			//String url ="jdbc:oracle:thin:@localhost:1521:orcl"; // 12c이상
-			String url = "jdbc:oracle:thin:@localhost:1521:orcl";
+			String url ="jdbc:oracle:thin:@localhost:1521:orcl";
+			// String url = "jdbc:oracle:thin:@192.168.219.103:1521:orcl"; /* 노트북 포트번호는 localhost를 못잡아서 ip번호로 */
+			
 			String id = "Team3";
 			String pw = "123456";
 			
