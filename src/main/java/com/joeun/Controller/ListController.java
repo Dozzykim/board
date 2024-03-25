@@ -34,12 +34,13 @@ public class ListController implements Initializable {
 	@FXML
 	public TableColumn<Board, String> colView;
 
-    private BoardService boardService = new BoardServiceImpl();
+    static private BoardService boardService = new BoardServiceImpl();
 
 
     @FXML
     void moveToInsert(ActionEvent event) throws IOException {
-        App.setRoot("board/insert");
+		System.out.println("글쓰기 화면으로 이동합니다.");
+        App.setRoot("board/insert"); /* Insert.fxml 화면으로 이동 */
     }
 
     @Override
