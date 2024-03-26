@@ -21,7 +21,7 @@ public class InsertController {
     @FXML
     private TextField tWriter;
 
-    private BoardService boardService = new BoardServiceImpl();
+    static private BoardService boardService = new BoardServiceImpl();
 
     // @FXML
     // void moveToList(ActionEvent event) throws IOException {

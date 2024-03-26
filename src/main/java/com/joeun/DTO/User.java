@@ -18,10 +18,10 @@ public class User {
     private Date regDate;
 
     public User() {
-        this("id없음", "비번없음", "이름없음");
+        this("이름없음", "id없음", "비번없음" );
     }
 
-    public User(String id, String pw, String name) {
+    public User(String name, String id, String pw) {
         this.id = id;
         this.pw = pw;
         this.name = name;

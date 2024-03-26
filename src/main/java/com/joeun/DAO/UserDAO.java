@@ -1,8 +1,5 @@
 package com.joeun.DAO;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.joeun.DTO.User;
 
 /**
@@ -11,34 +8,65 @@ import com.joeun.DTO.User;
  */
 
 public class UserDAO extends JDBConnection {
-    // 유저 계정유효 여부 체크
-    public List<User> checkAccount() {
+    // 회원가입
+    public int insert(User userList) {
+        int result = 0;
 
-        // 유저 목록을 담을 컬렉션 객체 생성
-        List<User> userList = new ArrayList<User>();
-
-        // SQL 작성
-        String sql = " SELECT * " + " FROM users ";
+        // 유저 테이블에 담을 수 있도록 SQL문 작성
+        String sql = " INSERT INTO users (name, id, pw) "
+                    + " VALUES ( ?, ?, ? ) ";
         
         try {
-            // 쿼리(SQL) 실행 객체 생성 - Statement (stmt)
-            stmt = con.createStatement();
-            
-            // 쿼리(SQL) 실행 결과를 받아오는 객체 생성 - ResultSet (rs)
-            rs = stmt.executeQuery(sql);
+            psmt = con.prepareStatement(sql);
+            psmt.setString(1, userList.getName());
+            psmt.setString(2, userList.getId());
+            psmt.setString(3, userList.getPw());
 
-            // 조회 결과를 리스트(userList)에 추가
-            boolean IsExist = true;
-            while (IsExist) {
-                // rs.get으로 가져온... 데이터 일일히 ... 보드객체
-            }
+            result = psmt.executeUpdate();
+
 
         } catch (Exception e) {
-            // TODO: handle exception
+            System.err.println("회원 가입 시, 예외 발생");
+			e.printStackTrace();
         }
 
-        return null;
+        return result;
     }
 
-    
+    // 유저 체크
+    public boolean checkAccount(String id, String pw) {
+
+        boolean IsExist = false;
+
+        // SQL 작성
+        String sql = " SELECT * "
+				   + " FROM users "
+                   + " WHERE id = ? "
+                   + "   and pw = ? ";
+
+        try {
+            // 쿼리(SQL) 실행 객체 생성 - PreparedStatement (psmt)
+			psmt = con.prepareStatement(sql);
+
+            // psmt.setXXX( 순서번호, 매핑할 값 );
+			psmt.setString( 1, id );
+			psmt.setString( 2, pw );
+			
+			// 쿼리(SQL) 실행 -> 결과  - ResultSet (rs)
+			rs = psmt.executeQuery();
+
+            System.out.println(rs);
+
+            if (rs.next()) {
+                IsExist = true;
+            }
+            else 
+                IsExist = false;
+
+        } catch (Exception e) {
+            System.err.println("계정 조회 시, 예외 발생");
+			e.printStackTrace();
+        }
+        return IsExist;
+    }
 }

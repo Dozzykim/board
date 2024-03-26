@@ -24,7 +24,8 @@ public class BoardDAO extends JDBConnection {
 		
 		// SQL 작성
 		String sql = " SELECT * "
-				   + " FROM board ";
+				   + " FROM board "
+				   + " ORDER BY no ";
 		try {
 			// 쿼리(SQL) 실행 객체 생성 - Statement (stmt)
 			stmt = con.createStatement();
@@ -104,7 +105,7 @@ public class BoardDAO extends JDBConnection {
 		int result = 0;		// 결과 : 적용된 데이터 건수
 		
 		String sql = " INSERT INTO board (no, title, writer, content) "
-				   + " VALUES(SEQ_BOARD.NEXTVAL, ?, ?, ? ) ";
+				   + " VALUES(SEQ_BOARD_NO.NEXTVAL, ?, ?, ? ) ";
 		
 		try {
 			psmt = con.prepareStatement(sql);			// 쿼리 실행 객체 생성
